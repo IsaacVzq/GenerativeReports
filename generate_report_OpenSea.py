@@ -1,5 +1,34 @@
 import requests
 import openpyxl
+import os
+import smtplib
+from dotenv import load_dotenv
+import smtplib
+from email.message import EmailMessage
+#Env Variables
+load_dotenv()
+# Email Sent
+SENDER_EMAIL = str(os.environ.get('SENDER_EMAIL'))
+APP_PASSWORD = str(os.environ.get('PASSWORD_EMAIL'))
+
+def send_mail_with_excel(recipient_email, subject, content, excel_file):
+    msg = EmailMessage()
+    msg['Subject'] = subject
+    msg['From'] = SENDER_EMAIL
+    msg['To'] = recipient_email
+    msg.set_content(content)
+
+    with open(excel_file, 'rb') as f:
+        file_data = f.read()
+    msg.add_attachment(file_data, maintype="application", subtype="xlsx", filename=excel_file)
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login(SENDER_EMAIL, APP_PASSWORD)
+        smtp.send_message(msg)
+
+EXCEL_FILE_NAME = 'ReportAssets.xlsx'
+
+
 
 wb = openpyxl.Workbook()
 hoja = wb.active
@@ -14,7 +43,7 @@ data = response.json()
 # print(data['assets'])
 if data['assets']:
     total_asset = len(data['assets'])
-    print(total_asset)
+    print("Assets Evaluated: ", total_asset)
     for asset in list(data['assets']):
         products.append((
         asset["id"],
@@ -29,4 +58,16 @@ if data['assets']:
 for producto in products:
     # producto es una tupla con los valores de un producto 
     hoja.append(producto)    
-wb.save('productos.xlsx')
+wb.save(EXCEL_FILE_NAME)
+
+
+to = 'vazisaac9508@gmail.com'
+subject = 'OpenSea Owership Report '
+body = 'Email Automatizado no responder\n\n'
+try:
+    send_mail_with_excel(to,subject,body,EXCEL_FILE_NAME)
+    print ("Report was send successfully!")
+except Exception as ex:
+    print ("Something went wrong….",ex)
+        
+        
