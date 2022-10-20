@@ -61,7 +61,7 @@ for producto in products:
 wb.save(EXCEL_FILE_NAME)
 
 
-to = 'vazisaac9508@gmail.com'
+to = 'isaac.vazquez@designamx.com'
 subject = 'OpenSea Owership Report '
 body = 'Email Automatizado no responder\n\n'
 print(SENDER_EMAIL,APP_PASSWORD)
