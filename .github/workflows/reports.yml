@@ -19,4 +19,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests openpyxl load_dotenv
       - name: Display Python version
+      - uses: ./
         run: python generate_report_OpenSea
