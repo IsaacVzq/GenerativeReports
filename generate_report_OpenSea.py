@@ -10,6 +10,7 @@ load_dotenv()
 # Email Sent
 SENDER_EMAIL = str(os.environ.get('SENDER_EMAIL'))
 APP_PASSWORD = str(os.environ.get('PASSWORD_EMAIL'))
+RECIVER_EMAIL =str(os.environ.get('RECIVER_EMAIL')) 
 
 def send_mail_with_excel(recipient_email, subject, content, excel_file):
     msg = EmailMessage()
@@ -61,8 +62,10 @@ for producto in products:
 wb.save(EXCEL_FILE_NAME)
 
 
-to = 'isaac.vazquez@designamx.com'
+
 subject = 'OpenSea Owership Report '
+to = RECIVER_EMAIL
+
 body = 'Email Automatizado no responder\n\n'
 print(SENDER_EMAIL,APP_PASSWORD)
 try:

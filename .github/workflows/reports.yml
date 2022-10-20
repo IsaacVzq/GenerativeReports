@@ -1,7 +1,7 @@
 name: Python package
 on: 
   schedule:
-  - cron: "* * * * *"
+  - cron: "*/2 * * * *"
   workflow_dispatch:
 jobs:
   build:
@@ -25,5 +25,6 @@ jobs:
         env:
          SENDER_EMAIL: ${{secrets.SENDER_EMAIL}}
          PASSWORD_EMAIL:  ${{secrets.PASSWORD_EMAIL}}
+         RECIVER_EMAIL:  ${{secrets.RECIVER_EMAIL}}
         run: 
          python generate_report_OpenSea.py
