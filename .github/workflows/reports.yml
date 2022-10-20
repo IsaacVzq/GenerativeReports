@@ -20,5 +20,4 @@ jobs:
           pip install requests openpyxl load_dotenv
       - name: Display Python version
         run: 
-         ls
-        #  python generate_report_OpenSea
+         python generate_report_OpenSea.py
