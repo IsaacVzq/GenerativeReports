@@ -64,7 +64,7 @@ wb.save(EXCEL_FILE_NAME)
 to = 'vazisaac9508@gmail.com'
 subject = 'OpenSea Owership Report '
 body = 'Email Automatizado no responder\n\n'
-print(os.listdir)
+print(SENDER_EMAIL,APP_PASSWORD)
 try:
     send_mail_with_excel(to,subject,body,EXCEL_FILE_NAME)
     print ("Report was send successfully!")
