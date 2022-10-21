@@ -1,7 +1,7 @@
 name: Generate Report Inklings
 on: 
   schedule:
-  - cron: "*/5 * * * *"
+  - cron: "0 0 * * MON"
   workflow_dispatch:
 jobs:
   build:
